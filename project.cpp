@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
 #include <iomanip>
 using namespace std;
 
@@ -20,48 +21,132 @@ struct Node{
 
 Node* head = NULL;
 
+void dataFilm(){
+    FILE *data = fopen("film.txt", "r");
+    if (data == NULL) return;
+    
+    while (true){
+        Node *baru = new Node;
+
+        if (fscanf(data, "%[^;];%[^;];%d;%[^;];%f;%d;%d\n",
+            baru->data.judul,
+            baru->data.genre,
+            &baru->data.durasi,
+            baru->data.kategori,
+            &baru->data.rating,
+            &baru->data.harga,
+            &baru->data.kursi) != 7){
+
+            delete baru;
+            break;
+        }
+        baru->next = head;
+        head = baru;
+    }
+    fclose(data);
+}
+
+void simpanData(){
+    FILE *data = fopen("film.txt", "w");
+    Node *bantu = head;
+
+    while (bantu != NULL){
+        fprintf(data, "%s;%s;%d;%s;%.1f;%d;%d\n",
+        bantu->data.judul,
+        bantu->data.genre,
+        bantu->data.durasi,
+        bantu->data.kategori,
+        bantu->data.rating,
+        bantu->data.harga,
+        bantu->data.kursi);
+
+    bantu = bantu->next;
+    }
+    fclose(data);
+}
+
 void tambahFilm(){
-    Node* tambah = new Node;
+    int n;
+    cout << "Berapa film yang akan ditambahkan: ";
+    cin >> n;
     cin.ignore();
 
-    cout <<"Judul : ";
-    cin.getline(tambah->data.judul, 100);
-    cout << "Genre : ";
-    cin.getline(tambah-> data.genre, 50);
-    cout <<"Durasi (menit) : ";
-    cin >> tambah->data.durasi;
-    cout <<"Kategori (SU/13+/17+) : ";
-    cin >> tambah->data.kategori;
-    cout<<"Rating : ";
-    cin >> tambah->data.rating;
-    cout <<"Harga Tiket : ";
-    cin >> tambah->data.harga;
-    cout <<"Jumlah Kursi : ";
-    cin >>tambah->data.kursi;
-    cin.ignore();
+    for (int i = 1; i <= n; i++){
+        Node* tambah = new Node;
 
-    tambah->next = head;
-    head = tambah;
+        cout << "\n Data Film ke- " << i << endl;
 
-    FILE *data = fopen("film.txt", "a");
-    if (data == NULL){
-        cout <<"Gagal membuka file" << endl;
+        cout << "Judul : ";
+        cin.getline(tambah->data.judul, 100);
+        cout << "Genre : ";
+        cin.getline(tambah->data.genre, 50);
+        cout << "Durasi (menit) : ";
+        cin >> tambah->data.durasi;
+        cout << "Kategori (SU/13+/17+) : ";
+        cin >> tambah->data.kategori;
+        cout << "Rating : ";
+        cin >> tambah->data.rating;
+        cout << "Harga Tiket : ";
+        cin >> tambah->data.harga;
+        cout << "Jumlah Kursi : ";
+        cin >> tambah->data.kursi;
+        cin.ignore();
+
+        tambah->next = head;
+        head = tambah;
+
+        FILE *data = fopen("film.txt", "a");
+        if (data == NULL){
+            cout << "Gagal membuka File" << endl;
+            return;
+        }
+
+        fprintf(data, "%s;%s;%d;%s;%.1f;%d;%d\n",
+            tambah->data.judul,
+            tambah->data.genre,
+            tambah->data.durasi,
+            tambah->data.kategori,
+            tambah->data.rating,
+            tambah->data.harga,
+            tambah->data.kursi);
+
+        fclose(data);
+    }
+    cout << "\nData film berhasil ditambahkan!\n";
+}
+
+void hapusfilm(){
+    if(head == NULL){
+        cout << "Data film kosong\n";
         return;
     }
 
-    fprintf(data, "%s;%s;%d;%s;%.1f;%d;%d\n",
-    tambah->data.judul,
-    tambah->data.genre,
-    tambah-> data.durasi,
-    tambah-> data.kategori,
-    tambah-> data.rating,
-    tambah->data.harga,
-    tambah->data.kursi);
+    char judul[100];
+    cout << " Masukkan judul film: ";
+    cin.getline(judul, 100);
 
-    fclose(data);
-    cout <<"Film berhasil ditambah!\n";
+    Node *hapus = head, *prev = NULL;
+
+    while(hapus !=NULL && strcmp(hapus->data.judul, judul) != 0){
+        prev = hapus;
+        hapus = hapus->next;
+    }
+    
+    if(hapus== NULL){
+        cout << "Film tidak ditemukan\n";
+        return;
+    }
+
+    if (prev == NULL){
+        head = head->next;
+    } else {
+        prev->next = hapus->next;
+    }
+    delete hapus;
+    simpanData();
+
+    cout << "Film berhasil dihapus\n";
 }
-
 void tampilFilm(){
     if(head == NULL){
         cout <<"Belum ada film\n";
@@ -71,37 +156,39 @@ void tampilFilm(){
     Node* bantu = head;
     int i = 1;
 
-    cout <<"\n=====================================================================\n";
-    cout <<"\n                            NOW SHOWING                              \n";
-    cout <<"\n---------------------------------------------------------------------\n";
-    cout <<"No   Judul                Genre        Durasi     Harga       Status   \n";
-    cout <<"\n---------------------------------------------------------------------\n";
+    cout << "\n+====================================================================+\n";
+    cout << "|                            NOW SHOWING                             |\n";
+    cout << "+====================================================================+\n";
+    cout << "| No | Judul                | Genre     | Durasi | Harga | Status    |\n";
+    cout << "+--------------------------------------------------------------------+\n";
 
-    while(bantu != NULL){
-        cout << "[" << i << "] ";
-        cout << left << setw(25) << bantu-> data.judul;
-        cout << setw(12) << bantu-> data.genre;
-        cout << setw(8) << bantu->data.durasi;
-        cout << setw(8) << bantu->data.harga;
+    while (bantu != NULL){
+        cout << "| " << setw(2) << i << " | ";
+        cout << left << setw(20) << bantu->data.judul << " | ";
+        cout << setw(9) << bantu->data.genre << " | ";
+        cout << setw(6) << bantu->data.durasi << " | ";
+        cout << setw(5) << bantu->data.harga << " | ";
 
-        if(bantu-> data.kursi > 0){
-            cout <<"Tersedia";
+        if (bantu->data.kursi > 0){
+            cout << "Tersedia  |\n";
         } else {
-            cout <<"Penuh";
+            cout << "Penuh |\n";
         }
-        cout << endl;
-        bantu = bantu-> next;
+
+        bantu = bantu->next;
         i++;
     }
-    cout <<"\n---------------------------------------------------------------------\n";
+
+    cout << "+====================================================================+\n";
 
     int pilih;
-    cout <<"\nPilih nomor film (0 kembali) : ";
+    cout <<"\n[0] Untuk kembali ke menu \n Pilih nomor film: ";
     cin >> pilih;
     cin.ignore();
 
-    if (pilih == 0)
-    return;
+    if (pilih == 0){
+        return;
+    }
 
     bantu = head;
     i = 1;
@@ -115,50 +202,65 @@ void tampilFilm(){
         return;
     }
 
-    //DETAIL
-    cout <<"\n=====================================================================\n";
-    cout <<"\n                      DETAIL FILM                                    \n";
-    cout <<"\n=====================================================================\n";
-    cout <<"Judul : " << bantu->data.judul << endl;
-    cout <<"Genre : " << bantu->data.genre << endl;
-    cout <<"Durasi : " << bantu->data.durasi << " menit\n";
-    cout <<"Kategori : " << bantu->data.kategori << endl;
-    cout <<"Rating : " << bantu->data.rating << "/ 10\n";
-    cout <<"Harga: " << bantu->data.harga << endl;
-    cout <<"Kursi : " << bantu->data.kursi<< endl;
-    cout <<"\n=====================================================================\n";
+    cout << "\n+=====================================+\n";
+    cout << "|            DETAIL FILM	      |\n";
+    cout << "+=====================================+\n";
+    cout << " Judul    : " << bantu->data.judul << endl;
+    cout << " Genre    : " << bantu->data.genre << endl;
+    cout << " Durasi   : " << bantu->data.durasi << " menit\n";
+    cout << " Kategori : " << bantu->data.kategori << endl;
+    cout << " Rating   : " << bantu->data.rating << " / 10\n";
+    cout << " Harga    : " << bantu->data.harga << endl;
+    cout << " Kursi    : " << bantu->data.kursi << endl;
+    cout << "+=====================================+\n";
+
     int pilihBooking;
-    cout <<"[1] Booking Tiket\n";
-    cout <<"[0] Kembali\n";
-    cout <<"Pilih : ";
+    cout << "\n[1] Booking\n[0] Kembali\nPilih: ";
     cin >> pilihBooking;
     cin.ignore();
+
+    if( pilihBooking == 1){
+        int jumlah;
+        cout << "Jumlah tiket: ";
+        cin >> jumlah;
+        cin.ignore();
+
+        if(jumlah <= bantu->data.kursi){
+            bantu->data.kursi -= jumlah;
+            simpanData();
+            cout << "Booking berhasil!\n";
+        } else {
+            cout << "Kursi Tidak cukup\n";
+        }
+    }
 }
 
 int main(){
+    dataFilm();
     int menu;
 
     do{
-        cout<<"\n=====================================================================\n";
-        cout<<"                           BIOSKOP SYSTEM                              \n";
-        cout<<"\n=====================================================================\n";
-        cout<<"[1] Now Showing\n";
-        cout<<"[2] Tambah Film\n";
-        cout<<"[3] Urutkan Harga Tiket\n";
-        cout<<"[4] Cari Film (Genre)\n";
-        cout<<"[5] Hapus Film\n";
-        cout<<"[0] Keluar\n";
-        cout <<"\n=====================================================================\n";
-        cout <<"Pilih : ";
+        cout << "\n+=====================================+\n";
+        cout << "|     SISTEM MANAJEMEN BIOSKOP	      |\n";
+        cout << "+=====================================+\n";
+        cout << "| [ 1 ] Now Showing		      |\n";
+        cout << "| [ 2 ] Tambah Film Baru              |\n";
+        cout << "| [ 3 ] Urutkan Harga Tiket	      |\n";
+        cout << "| [ 4 ] Cari Genre Film 	      |\n";
+        cout << "| [ 5 ] Hapus Film	              |\n";
+        cout << "| [ 0 ] Keluar                        |\n";
+        cout << "+=====================================+\n";
+
+        cout << "Pilih Menu => ";
         cin >> menu;
         cin.ignore();
 
         if (menu == 1){
             tampilFilm();
-        }
-        else if (menu == 2){
+        } else if (menu == 2){
             tambahFilm();
-            tampilFilm();
+        }else if (menu == 5){
+            hapusfilm();
         }
     } while (menu != 0);
 }
