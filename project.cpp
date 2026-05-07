@@ -235,6 +235,40 @@ void tampilFilm(){
     }
 }
 
+void cariFilm(){
+	if(head == NULL){
+		cout <<"Belum ada film\n";
+		return;
+	}
+	
+	char cari[50];
+	cout<<"Masukkan genre yang dicari: ";
+	cin.getline(cari, 50);
+	
+	Node* bantu = head;
+	bool ketemu = false;
+	
+	cout <<"\nHASIL PENCARIAN   : \n";
+	cout <<"-----------------------\n";
+	while (bantu != NULL){
+		if(strcmp(bantu->data.genre, cari) == 0){
+			cout <<"Judul : " << bantu->data.judul << endl;
+			cout <<"Genre : " << bantu->data.genre << endl;
+            cout <<"Durasi : " << bantu->data.durasi << endl;
+			cout <<"Harga : Rp " << bantu->data.harga << endl;
+            cout <<"Kursi : " << bantu->data.kursi << endl;
+			cout <<"-----------------------\n";
+
+			ketemu = true;
+		}
+		bantu = bantu-> next;
+	}
+	
+	if(ketemu == false){
+		cout <<"Film tidak ditemukan\n";
+	}
+}
+
 int main(){
     dataFilm();
     int menu;
@@ -259,7 +293,9 @@ int main(){
             tampilFilm();
         } else if (menu == 2){
             tambahFilm();
-        }else if (menu == 5){
+        } else if(menu == 4){
+			cariFilm();
+		} else if (menu == 5){
             hapusfilm();
         }
     } while (menu != 0);
