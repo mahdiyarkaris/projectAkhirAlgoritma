@@ -266,7 +266,109 @@ void cariFilm(){
 	
 	if(ketemu == false){
 		cout <<"Film tidak ditemukan\n";
+        return;
 	}
+
+    char pilih[100];
+    cout <<"\nMasukkan judul film : ";
+    cin.getline(pilih, 100);
+
+    bantu = head;
+
+    while(bantu != NULL){
+        if(strcmp(bantu->data.judul, pilih) == 0){
+            int jumlah;
+
+            cout <<"Jumlah tiket : ";
+            cin >> jumlah;
+            cin.ignore();
+
+            if (jumlah <= bantu->data.kursi){
+                bantu->data.kursi = bantu->data.kursi - jumlah;
+                cout <<"Booking berhasil\n";
+                cout <<"Sisa kursi : " << bantu->data.kursi << endl;
+            } else {
+                cout <<"Kursi tidak cukup\n";
+            }
+        }
+        bantu = bantu->next;
+    }
+}
+
+void sortingHarga(){
+
+    if (head == NULL){
+        cout << "Belum ada data film\n";
+        return;
+    }
+    bool tukar;
+    Node *bantu;
+    Node *akhir = NULL;
+    
+    do {
+        tukar = false;
+        bantu = head;
+
+        while (bantu->next != akhir){
+            if (bantu->data.harga > bantu->next->data.harga){
+
+                FILM temp = bantu->data;
+                bantu->data = bantu->next->data;
+                bantu->next->data = temp;
+
+                tukar = true;
+            }
+            bantu = bantu->next;
+        }
+        akhir = bantu;
+		} while (tukar);
+
+    FILE *data = fopen("film.txt", "w");
+
+    if (data == NULL){
+        cout << "Gagal membuka file\n";
+        return;
+    }
+    bantu = head;
+
+    while (bantu != NULL){
+
+        fprintf(data, "%s;%s;%d;%s;%.1f;%d;%d\n",
+            bantu->data.judul,
+            bantu->data.genre,
+            bantu->data.durasi,
+            bantu->data.kategori,
+            bantu->data.rating,
+            bantu->data.harga,
+            bantu->data.kursi);
+
+        bantu = bantu->next;
+    }
+
+    fclose(data);
+
+    cout << "\n+===========================================================+\n";
+    cout << "|         FILM DIURUTKAN BERDASARKAN HARGA        |\n";
+    cout << "+===========================================================+\n";
+
+    bantu = head;
+    int no = 1;
+
+    cout << "| No | Judul                | Genre     | Harga             |\n";
+    cout << "+-----------------------------------------------------------+\n";
+
+    while (bantu != NULL){
+
+        cout << "| "
+             << setw(2) << no << " | "
+             << left << setw(20) << bantu->data.judul << " | "
+             << setw(9) << bantu->data.genre << " | Rp "
+             << setw(10) << bantu->data.harga << " |\n";
+
+        bantu = bantu->next;
+        no++;
+    }
+    cout << "+===========================================================+\n";
 }
 
 int main(){
@@ -293,10 +395,40 @@ int main(){
             tampilFilm();
         } else if (menu == 2){
             tambahFilm();
-        } else if(menu == 4){
+        } else if(menu == 3){
+			sortingHarga();
+		} else if(menu == 4){
 			cariFilm();
 		} else if (menu == 5){
             hapusfilm();
         }
     } while (menu != 0);
 }
+/*
+void ubah(){
+
+    if(head == NULL){
+        cout << "Data film kosong\n";
+        return;
+    }
+
+    char judul[100];
+
+    cout << "Masukkan judul film yang ingin diubah: ";
+    cin.getline(judul, 100);
+
+    Node* bantu = head;
+    bool ketemu = false;
+
+    while (bantu != NULL){
+
+        if(strcmp(bantu->data.judul, judul) == 0){
+
+            ketemu = true;
+        }
+        bantu = bantu->next;
+    }
+    if(!ketemu){
+   cout letemu
+    }
+}*/

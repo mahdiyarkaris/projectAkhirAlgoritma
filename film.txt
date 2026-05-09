@@ -1,25 +1,30 @@
-The Notebook;Romansa;123;13+;7.8;45000;30
-Habibie & Ainun;Romansa;121;SU;7.6;40000;35
-Dilan 1990;Romansa;110;13+;6.8;35000;40
-John Wick 4;Action;169;17+;7.8;55000;25
+Megachan;Horor;100;17+;9.8;87000;35
 Avengers Endgame;Action;181;13+;8.4;60000;30
-Spider-Man;Animasi;117;SU;8.4;45000;45
-The Minions;Animasi;87;SU;6.6;30000;70
-Frozen;Animasi;103;SU;7.0;35000;60
+John Wick 4;Action;169;17+;7.8;55000;19
 The Nun II;Horor;110;17+;6.8;50000;35
-Siksa Kubur;Horor;117;17+;7.2;45000;40
-Pengabdi Setan 2;Horor;119;17+;7.6;40000;50
 KKN Desa Penari;Horror;130;13+;8.9;50000;45
-Upin&Ipin;Animasi;100;SU;7.2;28000;70
+Exorcist;Horor;122;17+;8.0;50000;24
+Headshot;Action;118;17+;6.3;48000;30
+The Notebook;Romansa;123;13+;7.8;45000;30
+Spider-Man;Animasi;117;SU;8.4;45000;45
+Siksa Kubur;Horor;117;17+;7.2;45000;40
+Insidious;Horor;103;17+;6.8;45000;30
+Train Busan;Horor;118;17+;7.6;45000;40
+The Meg;Action;113;13+;5.7;45000;40
+Habibie & Ainun;Romansa;121;SU;7.6;40000;35
+Pengabdi Setan 2;Horor;119;17+;7.6;40000;50
+Sewu Dino;Horor;121;17+;6.2;40000;40
+Jujutsu Kaisen;Animasi;105;13+;7.9;40000;45
+Frozen II;Animasi;115;SU;8.4;36500;30
+Dilan 1990;Romansa;110;13+;6.8;35000;40
+Frozen;Animasi;103;SU;7.0;35000;60
+Naruto Last;Animasi;112;13+;7.6;35000;50
+Sabrina;Horor;113;17+;4.2;35000;45
+The Lord;Action;90;13+;7.9;34500;20
+Doraemon;Animasi;95;SU;7.8;32000;55
+The Minions;Animasi;87;SU;6.6;30000;70
 Danur;Horor;74;13+;5.4;30000;50
 Doraemon Dino;Animasi;110;SU;7.5;30000;60
-Insidious;Horor;103;17+;6.8;45000;30
-Sewu Dino;Horor;121;17+;6.2;40000;40
-Naruto Last;Animasi;112;13+;7.6;35000;50
-Headshot;Action;118;17+;6.3;48000;30
-Train Busan;Horor;118;17+;7.6;45000;40
-Doraemon;Animasi;95;SU;7.8;32000;55
-Sabrina;Horor;113;17+;4.2;35000;45
-Jujutsu Kaisen;Animasi;105;13+;7.9;40000;45
-The Meg;Action;113;13+;5.7;45000;40
-Exorcist;Horor;122;17+;8.0;50000;25
+Upin&Ipin;Animasi;100;SU;7.2;28000;70
+Conjur;Horor;40;13+;7.6;20000;0
+Pelangi;Animasi;120;SU;7.6;20000;30
