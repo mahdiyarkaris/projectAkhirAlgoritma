@@ -276,7 +276,7 @@ void tampilFilm(){
 			cout <<"Booking berhasil\n";
 			cout <<"Sisa kursi : " << bantu->data.kursi << endl;
 		}else{
-				cout <<"Jumlah tiket tidak valid\n";
+            cout <<"Jumlah tiket tidak valid\n";
 		}
 	}
 }
@@ -366,14 +366,14 @@ void booking(){
             cin >> jumlah;
             cin.ignore();
 
-            if(jumlah <= bantu->data.kursi) {
+            if(jumlah > 0 && jumlah <= bantu->data.kursi) {
                 bantu->data.kursi = bantu->data.kursi -jumlah;
                 simpanData();
                 
                 cout << "Booking berhasil\n";
                 cout <<"Sisa kursi : "<< bantu->data.kursi << endl;
             }else{
-                cout << "Kursi tidak cukup\n";
+                cout <<"Jumlah tiket tidak valid\n";
             }
         }
         bantu = bantu->next;
