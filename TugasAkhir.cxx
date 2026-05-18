@@ -145,7 +145,7 @@ void ubahDataFilm(){
             cout << " Harga Baru : ";
             cin >> bantu->data.harga;
             cout << " Jumlah Kursi baru : ";
-            cin >> bantu->data.durasi;
+            cin >> bantu->data.kursi;
 
             cin.ignore();
             simpanData();
@@ -216,7 +216,7 @@ void tampilFilm(){
         if (bantu->data.kursi > 0){
             cout << "Tersedia  |\n";
         } else {
-            cout << "Penuh |\n";
+            cout << "Penuh     |\n";
         }
 
         bantu = bantu->next;
@@ -348,62 +348,56 @@ void sortingHarga(){
 }
 
 void cariFilm(){
-	if(head == NULL){
-		cout <<"Belum ada film\n";
-		return;
-	}
-	
-	char cari[50];
-	cout<<"Masukkan genre yang dicari: ";
-	cin.getline(cari, 50);
-	
-	Node* bantu = head;
-	bool ketemu = false;
-	
-	cout <<"\nHASIL PENCARIAN   : \n";
-	cout <<"-----------------------\n";
-	while (bantu != NULL){
-		if(strcmp(bantu->data.genre, cari) == 0){
-			cout <<"Judul : " << bantu->data.judul << endl;
-			cout <<"Genre : " << bantu->data.genre << endl;
-            cout <<"Durasi : " << bantu->data.durasi << endl;
-			cout <<"Harga : Rp " << bantu->data.harga << endl;
-            cout <<"Kursi : " << bantu->data.kursi << endl;
-			cout <<"-----------------------\n";
-
-			ketemu = true;
-		}
-		bantu = bantu-> next;
-	}
-	
-	if(ketemu == false){
-		cout <<"Film tidak ditemukan\n";
+    if(head == NULL){
+        cout <<"Belum ada film\n";
         return;
-	}
+    }
 
-    char pilih[100];
-    cout <<"\nMasukkan judul film : ";
-    cin.getline(pilih, 100);
+    char cari[50];
+    cout << "Masukkan genre film : ";
+    cin.getline(cari, 50);
 
-    bantu = head;
+    Node *bantu = head;
+    bool ketemu = false;
+    int no = 1;
 
     while(bantu != NULL){
-        if(strcmp(bantu->data.judul, pilih) == 0){
-            int jumlah;
-
-            cout <<"Jumlah tiket : ";
-            cin >> jumlah;
-            cin.ignore();
-
-            if (jumlah <= bantu->data.kursi){
-                bantu->data.kursi = bantu->data.kursi - jumlah;
-                cout <<"Booking berhasil\n";
-                cout <<"Sisa kursi : " << bantu->data.kursi << endl;
-            } else {
-                cout <<"Kursi tidak cukup\n";
+        if(strcmp(bantu->data.genre, cari) == 0) {
+            if (ketemu == false){
+                cout <<"\n+=========================================================+\n";
+                cout <<"|                    HASIL PENCARIAN                      |\n";
+                cout <<"+=========================================================+\n";
+                cout <<"| No | Judul                | Durasi  | Harga | Status    |\n";
+                cout <<"+---------------------------------------------------------+\n";
             }
+            ketemu = true;
+            
+            cout <<"| " << setw(2) << no << " | ";
+			cout << left << setw(20) << bantu->data.judul <<" | ";
+			cout << setw(7) << bantu->data.durasi <<" | ";
+			cout << setw(5) << bantu->data.harga << " | ";
+            if(bantu->data.kursi > 0){
+                cout <<"Tersedia  |\n";
+            }else {
+                cout << "Penuh     |\n";
+            }
+            no++;
         }
         bantu = bantu->next;
+    }
+    if(ketemu == false){
+        cout <<"Film tidak ditemukan\n";
+        return;
+    }
+    cout << "+=========================================================+\n";
+    
+    char pilih;
+    cout << "\nIngin booking? (y/t) : ";
+    cin >> pilih;
+    cin.ignore();
+
+    if(pilih == 'y'){
+        booking();
     }
 }
 
