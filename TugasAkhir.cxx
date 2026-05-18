@@ -21,6 +21,24 @@ struct Node{
 
 Node* head = NULL;
 
+bool loginAdmin(){
+    char username[50];
+    char password[50];
+    
+    cout <<"===== Login =====\n";
+    cout << "Username : ";
+    cin.getline(username, 50);
+    cout <<"Password : ";
+    cin.getline(password, 50);
+
+    if(strcmp(username, "Admin01") == 0 && strcmp(password, "12345") == 0){
+        cout << "\nLogin lerhasil\n";
+        return true;
+    } else {
+        cout <<"Username atau password salah!\n";
+        return false;
+    }
+}
 void dataFilm(){
     FILE *data = fopen("film.txt", "r");
     if (data == NULL) return;
@@ -63,6 +81,45 @@ void simpanData(){
     bantu = bantu->next;
     }
     fclose(data);
+}
+void simpanRiwayat(char nama[], char judul[], int jumlah,int total){
+    
+    FILE *riwayat = fopen("riwayat.txt", "a");
+    fprintf(riwayat, "Nama : %s\nFilm : %s\nJumlah tiket : %d\nTotal bayar : Rp %d\n-----\n",
+     nama,judul,jumlah,total);
+
+     fclose(riwayat);
+}
+
+void tampilRiwayat(){
+    FILE *riwayat = fopen("riwayat.txt", "r");
+    if(riwayat == NULL){
+        cout << "Belum ada riwayat booking\n";
+        return;
+    }
+    char tampil[175];
+    cout << "\n+======================+";
+    cout << "\n|   Riwayat Booking    |";
+    cout << "\n+======================+\n";
+
+    while (fgets(tampil, sizeof(tampil), riwayat) != NULL){
+        cout << tampil;
+    }
+    fclose(riwayat);
+}
+
+void cetakStruk(char nama[], char judul[], int jumlah, int harga){
+    int total = jumlah * harga;
+
+    cout << "\n+=================================+\n";
+    cout << "|          STRUK PEMBELIAN        |\n";
+    cout << "+=================================+\n";
+    cout << "Nama         : " << nama << endl;
+    cout << "Film         : " << judul << endl;
+    cout << "Jumlah Tiket : " << jumlah << endl;
+    cout << "Harga Tiket  : Rp " << harga << endl;
+    cout << "Total Bayar  : Rp " << total << endl;
+    cout << "===================================\n";
 }
 
 void tambahFilm(){
@@ -130,7 +187,7 @@ void ubahDataFilm(){
     while (bantu != NULL){
         if(strcmp(bantu->data.judul, judul) == 0){
             ketemu = true;
-            cout << "\nUBAH DATA FILM==\n";
+            cout << "\n=== UBAH DATA FILM ===\n";
 
             cout << " Judul Baru : ";
             cin.getline(bantu->data.judul, 100);
@@ -226,7 +283,8 @@ void tampilFilm(){
     cout << "+====================================================================+\n";
 
     int pilih;
-    cout <<"\n[0] Untuk kembali ke menu \n Pilih nomor film: ";
+    cout <<"\n[0] Untuk kembali ke menu";
+    cout <<"\n Pilih nomor film: ";
     cin >> pilih;
     cin.ignore();
 
@@ -259,11 +317,18 @@ void tampilFilm(){
     cout << "+=====================================+\n";
 
     int pilihBooking;
-    cout << "\n[1] Booking\n[0] Kembali\nPilih: ";
+    cout <<"\n[1] Booking";
+    cout <<"\n[0] Kembali";
+    cout <<"\nPilih: ";
     cin >> pilihBooking;
     cin.ignore();
 
     if( pilihBooking == 1){
+
+        char nama[100];
+        cout << "Nama Pemesan : ";
+        cin.getline(nama, 100);
+
         int jumlah;
         cout <<"Jumlah tiket: ";
         cin >> jumlah;
@@ -272,10 +337,15 @@ void tampilFilm(){
         if(jumlah > 0 && jumlah <= bantu->data.kursi){
 			bantu->data.kursi = bantu->data.kursi - jumlah;
 			simpanData();
+
+            int total = jumlah * bantu->data.harga;
 			
 			cout <<"Booking berhasil\n";
 			cout <<"Sisa kursi : " << bantu->data.kursi << endl;
-		}else{
+
+            cetakStruk(nama, bantu->data.judul, jumlah, bantu->data.harga);
+            simpanRiwayat(nama, bantu->data.judul, jumlah, total);
+        }else{
             cout <<"Jumlah tiket tidak valid\n";
 		}
 	}
@@ -357,11 +427,17 @@ void booking(){
     Node *bantu = head;
     bool ketemu = false;
 
-    while(bantu != NULL && ketemu != true){
+    while(bantu != NULL){
         if(strcmp(bantu->data.judul, judul) == 0){
             ketemu = true;
+
+            char nama[100];
+
+            cout << "Nama Pemesan : ";
+            cin.getline(nama, 100);
+
             int jumlah;
-            
+
             cout <<"Jumlah tiket : ";
             cin >> jumlah;
             cin.ignore();
@@ -370,8 +446,12 @@ void booking(){
                 bantu->data.kursi = bantu->data.kursi -jumlah;
                 simpanData();
                 
+                int total = jumlah * bantu->data.harga;
                 cout << "Booking berhasil\n";
                 cout <<"Sisa kursi : "<< bantu->data.kursi << endl;
+                
+                cetakStruk(nama,bantu->data.judul,jumlah,bantu->data.harga);
+                simpanRiwayat(nama,bantu->data.judul,jumlah,total);
             }else{
                 cout <<"Jumlah tiket tidak valid\n";
             }
@@ -439,6 +519,9 @@ void cariFilm(){
 
 int main(){
     dataFilm();
+    if(loginAdmin() == false){
+        return 0;
+    }
     int menu;
 
     do{
@@ -451,6 +534,7 @@ int main(){
         cout << "| [ 4 ] Urutkan Harga Tiket	      |\n";
         cout << "| [ 5 ] Cari Genre Film 	      |\n";
         cout << "| [ 6 ] Hapus Film	              |\n";
+        cout << "| [ 7 ] Riwayat Booking               |\n";
         cout << "| [ 0 ] Keluar                        |\n";
         cout << "+=====================================+\n";
 
@@ -470,6 +554,8 @@ int main(){
 			cariFilm();
 		} else if (menu == 6){
             hapusfilm();
+        } else if(menu== 7){
+            tampilRiwayat();
         }
     } while (menu != 0);
 }

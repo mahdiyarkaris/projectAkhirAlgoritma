@@ -1,0 +1,75 @@
+Nama : Ahmad
+Film : Megachan
+Jumlah : 2
+Total : Rp 174000
+----------------------
+Nama : Rahmat
+Film : Insidious
+Jumlah Tiket : 3
+Total Bayar : Rp 135000
+----------------------
+Nama : Ahmad
+Film : KKN Desa Penari
+Jumlah Tiket : 2
+Total Bayar : Rp 100000
+----------------------
+Nama : kurniawan
+Film : EXO
+Jumlah Tiket : 3
+Total Bayar : Rp 45000
+----------------------
+Nama : AKu
+Film : Megachan
+Jumlah Tiket : 2
+Total Bayar : Rp 174000
+----------------------
+Nama : Yun Xia
+Film : The Nun II
+Jumlah Tiket : 2
+Total Bayar : Rp 100000
+----------------------
+Nama : Rangga
+Film : Exorcist
+Jumlah Tiket : 4
+Total Bayar : Rp 200000
+----------------------
+Nama : Ajeng
+Film : k
+Jumlah Tiket : 5
+Total Bayar : Rp 120000
+----------------------
+Nama : Gura
+Film : Train Busan
+Jumlah Tiket : 1
+Total Bayar : Rp 45000
+----------------------
+Nama : Ahmad
+Film : Exorcist
+Jumlah Tiket : 4
+Total Bayar : Rp 200000
+----------------------
+Nama : Lutfi
+Film : Exorcist
+Jumlah Tiket : 1
+Total Bayar : Rp 50000
+----------------------
+Nama : Ahmad
+Film : EXO
+Jumlah tiket : 3
+Total bayar : Rp 45000
+----------------------
+Nama : Rika
+Film : EXO
+Jumlah tiket : 1
+Total bayar : Rp 15000
+----------------------
+Nama : Prabowo
+Film : The Nun II
+Jumlah tiket : 4
+Total bayar : Rp 200000
+----------------------
+Nama : Fira
+Film : Doraemon
+Jumlah tiket : 2
+Total bayar : Rp 64000
+----------------------
