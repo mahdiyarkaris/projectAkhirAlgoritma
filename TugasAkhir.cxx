@@ -347,6 +347,40 @@ void sortingHarga(){
     cout << "+=======================================================+\n";
 }
 
+void booking(){
+    char judul[100];
+    cout << "Masukkan judul film : ";
+    cin.getline(judul, 100);
+
+    Node *bantu = head;
+    bool ketemu = false;
+
+    while(bantu != NULL && ketemu != true){
+        if(strcmp(bantu->data.judul, judul) == 0){
+            ketemu = true;
+            int jumlah;
+            
+            cout <<"Jumlah tiket : ";
+            cin >> jumlah;
+            cin.ignore();
+
+            if(jumlah <= bantu->data.kursi) {
+                bantu->data.kursi = bantu->data.kursi -jumlah;
+                simpanData();
+                
+                cout << "Booking berhasil\n";
+                cout <<"Sisa kursi : "<< bantu->data.kursi << endl;
+            }else{
+                cout << "Kursi tidak cukup\n";
+            }
+        }
+        bantu = bantu->next;
+    }
+    if(ketemu == false){
+        cout <<"Film tidak ditemukan\n";
+    }
+}
+
 void cariFilm(){
     if(head == NULL){
         cout <<"Belum ada film\n";
