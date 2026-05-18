@@ -265,18 +265,20 @@ void tampilFilm(){
 
     if( pilihBooking == 1){
         int jumlah;
-        cout << "Jumlah tiket: ";
+        cout <<"Jumlah tiket: ";
         cin >> jumlah;
         cin.ignore();
 
-        if(jumlah <= bantu->data.kursi){
-            bantu->data.kursi -= jumlah;
-            simpanData();
-            cout << "Booking berhasil!\n";
-        } else {
-            cout << "Kursi Tidak cukup\n";
-        }
-    }
+        if(jumlah > 0 && jumlah <= bantu->data.kursi){
+			bantu->data.kursi = bantu->data.kursi - jumlah;
+			simpanData();
+			
+			cout <<"Booking berhasil\n";
+			cout <<"Sisa kursi : " << bantu->data.kursi << endl;
+		}else{
+				cout <<"Jumlah tiket tidak valid\n";
+		}
+	}
 }
 void sortingHarga(){
 
