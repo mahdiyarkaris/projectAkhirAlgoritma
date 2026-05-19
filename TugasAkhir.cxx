@@ -544,18 +544,32 @@ int main(){
 
         if (menu == 1){
             tampilFilm();
+            cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();
         } else if (menu == 2){
             tambahFilm();
+            cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();
         } else if(menu == 3){
-			ubahDataFilm();    
+			ubahDataFilm();
+            cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();    
         } else if(menu == 4){
 			sortingHarga();
+            cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();
 		} else if(menu == 5){
 			cariFilm();
+            cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();
 		} else if (menu == 6){
             hapusfilm();
+            cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();
         } else if(menu== 7){
             tampilRiwayat();
+            cout <<"\nTekan Enter untuk melanjutkan...";
+			cin.get();
         }
     } while (menu != 0);
 }
