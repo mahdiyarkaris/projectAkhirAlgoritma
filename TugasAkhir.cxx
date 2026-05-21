@@ -120,11 +120,11 @@ void cetakStruk(char nama[], char judul[], int jumlah, int harga){
     cout << "\n+=================================+\n";
     cout << "|          STRUK PEMBELIAN        |\n";
     cout << "+=================================+\n";
-    cout << "Nama         : " << nama << endl;
-    cout << "Film         : " << judul << endl;
-    cout << "Jumlah Tiket : " << jumlah << endl;
-    cout << "Harga Tiket  : Rp " << harga << endl;
-    cout << "Total Bayar  : Rp " << total << endl;
+    cout << "| Nama         : " << left << setw(17) << nama << "|\n";
+    cout << "| Film         : " << left << setw(17) << judul << "|\n";
+    cout << "| Jumlah Tiket : " << left << setw(17) << jumlah << "|\n";
+    cout << "| Harga Tiket  : Rp " << left << setw(14) << harga << "|\n";
+    cout << "| Total Bayar  : Rp " << left << setw(14) << total << "|\n";
     cout << "===================================\n";
 }
 
@@ -133,7 +133,7 @@ void tambahFilm(){
     cout << "Berapa film yang akan ditambahkan: ";
     cin >> n;
     cin.ignore();
-    
+
     for (int i = 1; i <= n; i++){
         Node* tambah = new Node;
 
@@ -313,13 +313,13 @@ void tampilFilm(){
     cout << "\n+=====================================+\n";
     cout << "|            DETAIL FILM	      |\n";
     cout << "+=====================================+\n";
-    cout << " Judul    : " << bantu->data.judul << endl;
-    cout << " Genre    : " << bantu->data.genre << endl;
-    cout << " Durasi   : " << bantu->data.durasi << " menit\n";
-    cout << " Kategori : " << bantu->data.kategori << endl;
-    cout << " Rating   : " << bantu->data.rating << " / 10\n";
-    cout << " Harga    : " << bantu->data.harga << endl;
-    cout << " Kursi    : " << bantu->data.kursi << endl;
+    cout << "| Judul   :"<< left <<setw(25)<< bantu->data.judul<< "|\n";
+    cout << "| Genre   : "<< left<< setw(25)<<bantu->data.genre <<"|\n";
+    cout << "| Durasi  :"<< bantu->data.durasi << " menit" << setw(16)<< " " << "|\n";
+    cout << "| Kategori:"<< left <<setw(25)<< bantu->data.kategori <<"|\n";
+    cout << "| Rating  :"<< bantu->data.rating << "/10" << setw(19) <<" " << "|\n";
+    cout << "| Harga   :"<< left <<setw(25)<< bantu->data.harga <<"|\n";
+    cout << "| Kursi   : " << left << setw(25)<< bantu->data.kursi<< "|\n";
     cout << "+=====================================+\n";
 
     int pilihBooking;
