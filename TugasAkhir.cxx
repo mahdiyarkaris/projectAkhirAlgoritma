@@ -32,7 +32,7 @@ bool loginAdmin(){
     cin.getline(password, 50);
 
     if(strcmp(username, "Admin01") == 0 && strcmp(password, "12345") == 0){
-        cout << "\nLogin lerhasil\n";
+        cout << "\nLogin Berhasil\n";
         return true;
     } else {
         cout <<"Username atau password salah!\n";
@@ -85,10 +85,16 @@ void simpanData(){
 void simpanRiwayat(char nama[], char judul[], int jumlah,int total){
     
     FILE *riwayat = fopen("riwayat.txt", "a");
-    fprintf(riwayat, "Nama : %s\nFilm : %s\nJumlah tiket : %d\nTotal bayar : Rp %d\n-----\n",
-     nama,judul,jumlah,total);
+    fprintf(riwayat, "+--------------------------------------------------------------------+\n");
+    fprintf(riwayat, "| Nama            | Film                | Tiket | Total              |\n");
+    fprintf(riwayat, "+--------------------------------------------------------------------+\n");
 
-     fclose(riwayat);
+    fprintf(riwayat,
+            "| %-15s | %-20s | %-6d | Rp %-14d|\n",
+            nama, judul, jumlah, total);
+    fprintf(riwayat, "+--------------------------------------------------------------------+\n\n");
+
+    fclose(riwayat);
 }
 
 void tampilRiwayat(){
@@ -98,9 +104,9 @@ void tampilRiwayat(){
         return;
     }
     char tampil[175];
-    cout << "\n+======================+";
-    cout << "\n|   Riwayat Booking    |";
-    cout << "\n+======================+\n";
+    cout << "\n+====================================================================+";
+    cout << "\n|                         RIWAYAT BOOKING                            |";
+    cout << "\n+====================================================================+\n";
 
     while (fgets(tampil, sizeof(tampil), riwayat) != NULL){
         cout << tampil;
@@ -127,7 +133,7 @@ void tambahFilm(){
     cout << "Berapa film yang akan ditambahkan: ";
     cin >> n;
     cin.ignore();
-
+    
     for (int i = 1; i <= n; i++){
         Node* tambah = new Node;
 
