@@ -290,7 +290,7 @@ void tampilFilm(){
 
     int pilih;
     cout <<"\n[0] Untuk kembali ke menu";
-    cout <<"\n Pilih nomor film: ";
+    cout <<"\nPilih nomor film: ";
     cin >> pilih;
     cin.ignore();
 
@@ -313,13 +313,13 @@ void tampilFilm(){
     cout << "\n+=====================================+\n";
     cout << "|            DETAIL FILM	      |\n";
     cout << "+=====================================+\n";
-    cout << "| Judul   :"<< left <<setw(25)<< bantu->data.judul<< "|\n";
-    cout << "| Genre   : "<< left<< setw(25)<<bantu->data.genre <<"|\n";
-    cout << "| Durasi  :"<< bantu->data.durasi << " menit" << setw(16)<< " " << "|\n";
-    cout << "| Kategori:"<< left <<setw(25)<< bantu->data.kategori <<"|\n";
-    cout << "| Rating  :"<< bantu->data.rating << "/10" << setw(19) <<" " << "|\n";
-    cout << "| Harga   :"<< left <<setw(25)<< bantu->data.harga <<"|\n";
-    cout << "| Kursi   : " << left << setw(25)<< bantu->data.kursi<< "|\n";
+    cout << "| Judul   : "<< left <<setw(25)<< bantu->data.judul<< " |\n";
+    cout << "| Genre   : "<< left<< setw(25)<<bantu->data.genre <<" |\n";
+    cout << "| Durasi  : "<< bantu->data.durasi << " menit" << setw(16)<< " " << " |\n";
+    cout << "| Kategori: "<< left <<setw(25)<< bantu->data.kategori <<" |\n";
+    cout << "| Rating  : "<< bantu->data.rating << "/10" << setw(19) <<" " << " |\n";
+    cout << "| Harga   : "<< left <<setw(25)<< bantu->data.harga <<" |\n";
+    cout << "| Kursi   : " << left << setw(25)<< bantu->data.kursi<< " |\n";
     cout << "+=====================================+\n";
 
     int pilihBooking;
