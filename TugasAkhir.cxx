@@ -82,17 +82,13 @@ void simpanData(){
     }
     fclose(data);
 }
-void simpanRiwayat(char nama[], char judul[], int jumlah,int total){
-    
+void simpanRiwayat(char nama[], char judul[], int jumlah, int total){
     FILE *riwayat = fopen("riwayat.txt", "a");
-    fprintf(riwayat, "+--------------------------------------------------------------------+\n");
-    fprintf(riwayat, "| Nama            | Film                | Tiket | Total              |\n");
-    fprintf(riwayat, "+--------------------------------------------------------------------+\n");
-
-    fprintf(riwayat,
-            "| %-15s | %-20s | %-6d | Rp %-14d|\n",
-            nama, judul, jumlah, total);
-    fprintf(riwayat, "+--------------------------------------------------------------------+\n\n");
+    fprintf(riwayat, "Nama  : %s\n", nama);
+    fprintf(riwayat, "Film  : %s\n", judul);
+    fprintf(riwayat, "Tiket : %d\n", jumlah);
+    fprintf(riwayat, "Total : Rp %d\n", total);
+    fprintf(riwayat, "-----------------------------\n");
 
     fclose(riwayat);
 }
@@ -104,10 +100,9 @@ void tampilRiwayat(){
         return;
     }
     char tampil[175];
-    cout << "\n+====================================================================+";
-    cout << "\n|                         RIWAYAT BOOKING                            |";
-    cout << "\n+====================================================================+\n";
-
+    cout << "\n+===========================+";
+    cout << "\n|      RIWAYAT BOOKING      |";
+    cout << "\n+===========================+\n";
     while (fgets(tampil, sizeof(tampil), riwayat) != NULL){
         cout << tampil;
     }
@@ -229,7 +224,7 @@ void hapusfilm(){
     }
 
     char judul[100];
-    cout << " Masukkan judul film: ";
+    cout << "Masukkan judul film: ";
     cin.getline(judul, 100);
 
     Node *hapus = head, *prev = NULL;
